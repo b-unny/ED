@@ -5,7 +5,7 @@
 mudar de ordem, de acordo com a nota*/
 
 typedef struct {
-    float info;
+    int info;
     struct Node *prox;
 } Node;
 
@@ -16,6 +16,8 @@ Node *newNode(int info){
     }
     new->info=info;
     new->prox=NULL;
+    
+    return new;
 }
 
 void enqueue(Node **front, int info){
@@ -30,11 +32,11 @@ void enqueue(Node **front, int info){
     while(aux->prox != NULL)
         aux=aux->prox;
 
-    (*aux)->prox = new;
+    aux->prox = new;
 }
 
 void dequeue(Node **front){
-    if(front == NULL){
+    if(*front == NULL){
         printf("Fila vazia.\n");
         return;
     }
@@ -60,12 +62,12 @@ int main(void){
         enqueue(&fila, nota);
     } // fila criada
 
-    // TODO "ordenar" a fila e contar quantos foram mudados de lugar
-
-    while(fila.prox != NULL){
-        if(fila.info < fila.prox.info)
-            cont++
-    fila = fila.prox;
+    Node *aux = fila;
+    
+    while(aux->prox != NULL){
+        if(aux->info < aux->prox->info)
+            cont++;
+    aux = aux->prox;
     }
 
     printf("%d\n", cont);
