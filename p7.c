@@ -45,10 +45,19 @@ void dequeue(Node **front){
     free(aux);
 } 
 
+void liberar(Node *front){
+    
+    while(aux->prox != NULL){
+        Node *aux = front;
+        front=front->prox;
+        free(aux);
+    }
+}
+
 #define MAX 1000
 
 int main(void){
-    int i, M, nota, cont=0;
+    int M, nota, cont=0;
     Node *fila = NULL;
     
     scanf("%d", &M);
@@ -57,7 +66,7 @@ int main(void){
     if(M>MAX)
        exit(0);
 
-    for(i=0; i<MAX; i++){
+    for(int i=0; i<MAX; i++){
         scanf("%d", &nota);
         enqueue(&fila, nota);
     } // fila criada
@@ -71,5 +80,10 @@ int main(void){
     }
 
     printf("%d\n", cont);
+    
+    liberar(&fila);
+    liberar(&aux);
+    
+    return 0;
 }
 
