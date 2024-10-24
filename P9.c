@@ -18,17 +18,29 @@ TNo *newNode(int info)
   return new;
 }
 
-TNo *insertInTree(TNo *root, int info)
+TNo *insert(TNo *root, int info)
 {
   if(root==NULL)
     return newNode(info); // se raiz esta vaiza, cria novo no
 
   if(info < root->valor)
-      root->esq = insertinTree(root->esq, info);
+      root->esq = insert(root->esq, info);
   else
-      root->dir = insertInTree(root->dir, info);
+      root->dir = insert(root->dir, info);
   return root;
-  
 }
+
+// encontar valor
+TNo* seek(TNo *root, int n2seek)
+{
+  if(root==NULL || root->info==n2seek)
+    return root;
+  if(info < root->info)
+    seek(root->esq, n2seek);
+  else
+    seek(root->dir, n2seek;
+}
+
+// encontrar filhos
 
 //  sei->la == (*sei).la
