@@ -1,46 +1,122 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct {
+typedef struct tree{
   int info;
-  struct TNo *dir;
-  struct Tno *esq;
+  struct tree *dir, *esq;
 } TNo;
 
-TNo *newNode(int info)
+TNo *novoNo(int info)
 {
-  TNo *new=(Tno*)malloc(sizeof(Tno));
-  if(!new)
-    exit(1);
-  new.info=info;
-  new.dir=NULL;
-  new.esq=NULL;
-  return new;
+  TNo *novo=(TNo*)malloc(sizeof(TNo));
+  
+  if(novo==NULL)  exit(1);
+  
+  novo->info=info;
+  novo->dir=NULL;
+  novo->esq=NULL;
+  
+  return novo;
 }
 
-TNo *insert(TNo *root, int info)
+TNo *inserir(TNo *raiz, int info)
 {
-  if(root==NULL)
-    return newNode(info); // se raiz esta vaiza, cria novo no
+  if(raiz==NULL)
+    return novoNo(info); // se raiz esta vaiza, cria novo no
 
-  if(info < root->valor)
-      root->esq = insert(root->esq, info);
+  if(info < raiz->info)
+      raiz->esq = inserir(raiz->esq, info);
   else
-      root->dir = insert(root->dir, info);
-  return root;
+      raiz->dir = inserir(raiz->dir, info);
+  
+  return raiz;
 }
 
 // encontar valor
-TNo* seek(TNo *root, int n2seek)
+int procurar(TNo *raiz, int n2seek)
 {
-  if(root==NULL || root->info==n2seek)
-    return root;
-  if(info < root->info)
-    seek(root->esq, n2seek);
-  else
-    seek(root->dir, n2seek;
+  if(raiz==NULL)    
+    return 0;
+  
+  if(raiz->info == n2seek)
+    return 1;
+  
+  if(n2seek < raiz->info)
+    return procurar(raiz->esq, n2seek);
+  
+  return procurar(raiz->dir, n2seek);
 }
 
-// encontrar filhos
+void encontrarFilhos(TNo *raiz, int valor)
+{
+    if(raiz == NULL) return;
+    
+    if(raiz->info == valor)
+    {
+      if(raiz->esq==NULL && raiz->dir==NULL) 
+        printf("[ ]\n"); // no nao possui filhos  
+        
+      else
+      {
+        printf("[");
+        if(raiz->esq)
+            printf("%d", raiz->esq->info);
+        if(raiz->esq && raiz->dir)
+            printf(", ");
+        if(raiz->dir)
+            printf("%d", raiz->dir->info);      
+        printf("]\n");                   
+      }
+    }
+    else if(valor < raiz->info)
+        encontrarFilhos(raiz->esq, valor);
+    else
+        encontrarFilhos(raiz->dir, valor);     
+}
 
-//  sei->la == (*sei).la
+void liberarArv(TNo *raiz)
+{
+    if(raiz == NULL) return;
+    
+    liberarArv(raiz->esq);
+    liberarArv(raiz->dir);
+    
+    free(raiz);
+}
+
+//  sei->la equivs to (*sei).la
+
+int main(void)
+{
+    int n;
+    
+    printf("Nro de casos teste: ");
+    scanf("%d", &n);
+    
+    for(int i=0; i<n; i++)
+    {
+        int K, valor, n2seek;
+        TNo *raiz = NULL;
+        
+        printf("Qtde de elementos: ");
+        scanf("%d",&K);
+        
+        for(int j=0; j<K; j++)
+        {
+            scanf("%d",&valor);
+            raiz=inserir(raiz, valor);
+        }
+        printf("n para busca: ");e
+        scanf("%d",&n2seek);
+        
+        if(procurar(raiz, n2seek))
+            encontrarFilhos(raiz, n2seek);
+        else 
+            printf("valor %d nao encontrado\n", n2seek);
+            
+        liberarArv(raiz);
+        
+        //system("clear");
+    }
+    return 0;
+}
