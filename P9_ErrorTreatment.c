@@ -5,7 +5,8 @@
 
 typedef struct tree {
     int info;
-    struct tree *dir, *esq;
+    struct tree *dir;
+    struct tree *esq;
 } TNo;
 
 jmp_buf buffer; // Ponto de recuperação para erros
