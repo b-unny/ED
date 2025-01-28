@@ -1,14 +1,6 @@
 #include"sort.h"
-
-void bubble_sort(int vet[] int tam)
-{
-    for(int i=0; i<tam; i++){
-        for(#include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
-#include<stdbool.h>
-
-#include"lib.h"
 
 Vetor *criarVet(int tam)
 {
