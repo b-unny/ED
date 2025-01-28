@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-#include"lib.h"
+#include"sort.h"
 
 int main( )
 {
