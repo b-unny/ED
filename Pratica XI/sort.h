@@ -1,5 +1,5 @@
-#ifndef#ifndef LIB_H
-#define LIB_H
+#ifndef#ifndef SORT_H
+#define SORT_H
 
 typedef struct vetor{
     int *vet;
