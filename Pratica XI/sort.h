@@ -1,20 +1,33 @@
-#ifndef SORT_H
-#define SORT_H
+#ifndef#ifndef LIB_H
+#define LIB_H
 
 typedef struct vetor{
-    int vet[tam];
-    float t_bubble;
-     
+    int *vet;
+    int tam;
+    double bubble, quick, shell, heap; // tempos de execucao de cada algoritmo
+
 } Vetor;
 
-void bubble_sort(int vet[], int tam);
+Vetor *criarVet(int tam);
 
-void quick_sort(int vet[], int tam);
+void preencherVet(Vetor *v);
 
-void shell_sort(int vet[], int tam); 
+void bubbleSort(int *vet, int tam);
 
-void heap_sort(int vet[], int tam);
+void quickSort(int *vet, int tam);
 
-// f p/ atribuir vlr aleatorio os vetores
+void shellSort(int *vet, int tam);
 
-// f p/ calc tempo de execucao e registrar valores
+void criarHeap(int *vet, int tam, int raiz);
+
+void heapSort(int *vet, int tam);
+
+int *copiarVet(int *vet, int tam);
+
+void calcTempo(Vetor *v, void (*algoritmo)(int*, int), double *campoTempo);
+
+void imprimirTempo(Vetor *vet);
+
+void verificar(int *vet, int tam);
+
+#endif 
